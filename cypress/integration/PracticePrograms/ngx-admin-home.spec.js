@@ -1,3 +1,5 @@
+// Author: Krishna Rao
+
 /// <reference types='Cypress'/>
 
 describe('ngx-admin suite', function () {
