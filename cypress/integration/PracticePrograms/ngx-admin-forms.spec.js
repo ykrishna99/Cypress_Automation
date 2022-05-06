@@ -23,14 +23,6 @@ describe("ngx-admin forms suite", function () {
     })
 
     it("Using the Grid", function () {
-        cy.visit('pages')
-        cy.title().should('include', 'ngx-admin')
-        cy.get('.logo').should('have.text', 'ngx-admin')
-
-        cy.get('a[title="Forms"]').click()
-        cy.get('a[title="Form Layouts"]').click()
-        cy.get('ngx-form-layouts').should('be.visible')
-
         cy.get('nb-card-header').should('contain', 'Using the Grid')
         cy.get('#inputEmail1').type('krishna@test.com')
         cy.get('#inputPassword2').type('test1234')

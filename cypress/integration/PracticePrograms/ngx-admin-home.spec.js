@@ -21,7 +21,6 @@ describe('ngx-admin home suite', function () {
             for (let index = 0; index < menus.length; index++) {
                 const element = menus[index];
                 if (element == actMenu) {
-                    // cy.log("Expected " + element + ' matching to actual '  + actMenu)
                     expect(element).equal(actMenu)
                 }
                 
@@ -30,7 +29,6 @@ describe('ngx-admin home suite', function () {
     })
     
     it('ngx-themes', function () {
-        cy.visit('pages')
         cy.get('nb-select').click()
         cy.get('.options-list nb-option').each( (themes, index) =>{            
             const themeName = themes.text().trim()
