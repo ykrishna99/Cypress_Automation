@@ -2,9 +2,8 @@
 
 /// <reference types='Cypress'/>
 
-describe('ngx-admin suite', function () {
+describe('ngx-admin home suite', function () {
 
-    const url = 'http://localhost:4200/pages'
     const menus = ['Layout', 'Forms', 'Model & Overlays', 'Extra Components', 'Tables & Data', 'Auth']
     const themesColors = {
         "Light":"rgb(255, 255, 255)",
@@ -14,7 +13,7 @@ describe('ngx-admin suite', function () {
     }
 
     it('ngx-admin menus', function (){
-        cy.visit(url)
+        cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
         cy.get('span.menu-title').each( menuItems => {
@@ -31,7 +30,7 @@ describe('ngx-admin suite', function () {
     })
     
     it('ngx-themes', function () {
-        cy.visit(url)
+        cy.visit('pages')
         cy.get('nb-select').click()
         cy.get('.options-list nb-option').each( (themes, index) =>{            
             const themeName = themes.text().trim()

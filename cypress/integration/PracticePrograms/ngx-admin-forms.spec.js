@@ -2,12 +2,10 @@
 
 /// <references types="Cypress"/>
 
-const url = "http://localhost:4200/pages"
-
 describe("ngx-admin forms suite", function () {
 
     it("Inline form", function () {
-        cy.visit(url)
+        cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
 
@@ -24,8 +22,8 @@ describe("ngx-admin forms suite", function () {
         cy.get('form.form-inline button').contains('Submit').click()
     })
 
-    it.only("Using the Grid", function () {
-        cy.visit(url)
+    it("Using the Grid", function () {
+        cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
 
@@ -34,10 +32,28 @@ describe("ngx-admin forms suite", function () {
         cy.get('ngx-form-layouts').should('be.visible')
 
         cy.get('nb-card-header').should('contain', 'Using the Grid')
-    })
+        cy.get('#inputEmail1').type('krishna@test.com')
+        cy.get('#inputPassword2').type('test1234')
+        cy.get('div.form-group input[type="radio"]').then( radioOptions =>{
+            cy.wrap(radioOptions)
+                .first()
+                .check({force: true})
+                .should('be.checked')
 
-    it("Basic form", function () {
-        
-    })
+            cy.wrap(radioOptions)
+                .eq(1)
+                .check({force: true})
+                .should('be.checked')
 
+            cy.wrap(radioOptions)
+                .first()
+                .should('not.be.checked')
+            
+            cy.wrap(radioOptions)
+                .last()
+                .should('be.disabled')
+            
+            cy.get('div.form-group button').contains('Sign in').click()
+        })
+    })
 })

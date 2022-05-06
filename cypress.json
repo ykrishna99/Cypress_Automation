@@ -1,3 +1,7 @@
 {
-    "chromeWebSecurity": true
+    "baseUrl":"http://localhost:4200",
+    "chromeWebSecurity": true,
+    "viewportHeight": 768,
+    "viewportWidth": 1366,
+    "ignoreTestFiles": ["**/1-getting-started/*", "**/2-advanced-examples/*"]
 }
