@@ -2,7 +2,7 @@
 
 /// <reference types='Cypress'/>
 
-describe('ngx-admin home suite', function () {
+describe('Home suite', function () {
 
     const menus = ['Layout', 'Forms', 'Model & Overlays', 'Extra Components', 'Tables & Data', 'Auth']
     const themesColors = {
@@ -12,7 +12,7 @@ describe('ngx-admin home suite', function () {
         "Corporate":"rgb(255, 255, 255)",
     }
 
-    it('ngx-admin menus', function (){
+    it('Menus validation', function (){
         cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
@@ -28,7 +28,7 @@ describe('ngx-admin home suite', function () {
         })
     })
     
-    it('ngx-themes', function () {
+    it('Themes validation', function () {
         cy.get('nb-select').click()
         cy.get('.options-list nb-option').each( (themes, index) =>{            
             const themeName = themes.text().trim()

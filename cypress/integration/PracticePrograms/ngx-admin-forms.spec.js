@@ -2,7 +2,7 @@
 
 /// <references types="Cypress"/>
 
-describe("ngx-admin forms suite", function () {
+describe("Forms suite", function () {
 
     it("Inline form", function () {
         cy.visit('pages')

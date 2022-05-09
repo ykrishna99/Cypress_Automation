@@ -44,18 +44,76 @@ describe("Smart Table Suite", function () {
                         'E_mail':'krishna@test.com', 
                         'Age': 40
                     }
-        
-        cy.get('a.ng2-smart-action-add-add').click()
-        cy.get('i.nb-checkmark').should('be.visible')
-        cy.get('input-editor input[placeholder="ID"]').type(data.ID)
-        cy.get('input-editor input[placeholder="First Name"]').type(data.First_Name)
-        cy.get('input-editor input[placeholder="Last Name"]').type(data.Last_Name)
-        cy.get('input-editor input[placeholder="Username"]').type(data.Username)
-        cy.get('input-editor input[placeholder="E-mail"]').type(data.E_mail)
-        cy.get('input-editor input[placeholder="Age"]').type(data.Age)
-        cy.get('i.nb-checkmark').click()
-        cy.wait(2000)
+
+        cy.get('thead').find('.nb-plus').click()
+        cy.get('.nb-checkmark').should('be.visible')
+        cy.get('thead').find('tr').eq(2).then(tableRow =>{
+            cy.wrap(tableRow).find('[placeholder="ID"]').type(data.ID)
+            cy.wrap(tableRow).find('[placeholder="First Name"]').type(data.First_Name)
+            cy.wrap(tableRow).find('[placeholder="Last Name"]').type(data.Last_Name)
+            cy.wrap(tableRow).find('[placeholder="Username"]').type(data.Username)
+            cy.wrap(tableRow).find('[placeholder="E-mail"]').type(data.E_mail)
+            cy.wrap(tableRow).find('[placeholder="Age"]').type(data.Age)
+            cy.wrap(tableRow).find('.nb-checkmark').click()
+            cy.wait(2000)
+        })
         cy.get('input-filter input[placeholder="ID"]').type(`${data.ID}{enter}`)
-        cy.get('div[ng-reflect-ng-switch="number"] div').should('contain', data.ID)
+        cy.wait(500)
+        cy.get('tbody').contains('tr',`${data.ID}`).then( tableRow1 =>{
+            cy.wrap(tableRow1).find('td').eq(6).should('contain', `${data.Age}`)
+        })
+        cy.get('input-filter input[placeholder="ID"]').clear()
+        cy.wait(500)
     })
+
+    //Edit the table row
+    it('Edit the table row', function () {      
+        cy.get('a[title="Smart Table"]').click()  
+        cy.get('tbody').contains('tr','Larry').then( tableRow =>{
+            cy.wrap(tableRow).find('.nb-edit').click()
+            cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('40')
+            cy.wrap(tableRow).find('.nb-checkmark').click()
+            cy.wrap(tableRow).find('td').eq(6).should('contain', '40')
+        })
+    })
+
+    it('Search the table', function () {
+        const ageSearch = ['20', '25', '30', '35', '40', '45', '50', '55', '60']
+        
+        ageSearch.forEach( age => {
+            cy.get('[placeholder="Age"]').clear().type(`${age}`)
+            cy.wait(250)
+            cy.get('tbody').find('tr').each( tableRows => {
+                var rowData = tableRows.find('td').text().trim()
+                if (rowData == 'No data found'){
+                    cy.wrap(tableRows).find('td').should('contain', `${rowData}`)
+                }else{
+                    cy.wrap(tableRows).find('td').eq(6).should('contain', `${age}`)
+                }    
+            })    
+        })
+        cy.get('[placeholder="Age"]').clear()
+        cy.wait(200)
+    })
+
+    it('Delete the table row', function () {
+
+        //Delete the first row - approach1
+        cy.get('tbody tr').first().find('.nb-trash').click()
+        cy.on('window:confirm', (confirm) =>{
+            expect(confirm).to.equal('Are you sure you want to delete?')            
+        })
+
+        //Delete the first row - approach2
+        const stub = cy.stub()
+        cy.on('window:confirm', stub)
+        cy.get('tbody tr').first().find('.nb-trash').click().then( () =>{
+            expect(stub.getCall(0)).to.be.calledWith('Are you sure you want to delete?')
+        })
+        
+        //Delete confirming to false
+        // cy.get('tbody tr').first().find('.nb-trash').click()
+        // cy.on('window:confirm', () => false)
+    })
+
 })
