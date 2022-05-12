@@ -1,0 +1,185 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-05-12T14:28:23.268Z",
+    "end": "2022-05-12T14:29:18.270Z",
+    "duration": 55002,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "343567dd-e793-4bed-bbd3-15bd27e96b2c",
+      "title": "",
+      "fullFile": "cypress/integration/NGX-Admin-Programs/ngx-admin-smarttable.spec.js",
+      "file": "cypress/integration/NGX-Admin-Programs/ngx-admin-smarttable.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cd99f069-7721-488c-a96b-e3c99199b387",
+          "title": "Smart Table Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Smart Table - Verify table headers",
+              "fullTitle": "Smart Table Suite Smart Table - Verify table headers",
+              "timedOut": null,
+              "duration": 7824,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Verifying table headers\ncy.get('.ng2-smart-actions div').should('have.text', 'Actions');\ncy.get('ng2-smart-table-title a').each((tableColumns, index) => {\n  var colName = tableColumns.text().trim();\n  expect(colName).equals(smartTblColumns[index]);\n}); // Verifying table headers filters placeholder value\ncy.get('.ng2-smart-actions-title a').should('have.attr', 'href').should('eq', '#');\ncy.get('input.form-control').each((tableColumns, index) => {\n  cy.wrap(tableColumns).then(tblCol => {\n    cy.log(tblCol.attr('placeholder'));\n    var plsValue = tblCol.attr('placeholder');\n    expect(plsValue).equals(smartTblColumns[index]);\n  });\n});",
+              "err": {},
+              "uuid": "bc65a4f3-ef90-437a-9a14-377dc67218dd",
+              "parentUUID": "cd99f069-7721-488c-a96b-e3c99199b387",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Add new row to the table",
+              "fullTitle": "Smart Table Suite Add new row to the table",
+              "timedOut": null,
+              "duration": 17137,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const data = {\n  'ID': 61,\n  'First_Name': 'Krishna',\n  'Last_Name': 'Yallampalli',\n  'Username': 'krishna',\n  'E_mail': 'krishna@test.com',\n  'Age': 40\n};\ncy.get('thead').find('.nb-plus').click();\ncy.get('.nb-checkmark').should('be.visible');\ncy.get('thead').find('tr').eq(2).then(tableRow => {\n  cy.wrap(tableRow).find('[placeholder=\"ID\"]').type(data.ID);\n  cy.wrap(tableRow).find('[placeholder=\"First Name\"]').type(data.First_Name);\n  cy.wrap(tableRow).find('[placeholder=\"Last Name\"]').type(data.Last_Name);\n  cy.wrap(tableRow).find('[placeholder=\"Username\"]').type(data.Username);\n  cy.wrap(tableRow).find('[placeholder=\"E-mail\"]').type(data.E_mail);\n  cy.wrap(tableRow).find('[placeholder=\"Age\"]').type(data.Age);\n  cy.wrap(tableRow).find('.nb-checkmark').click();\n  cy.wait(2000);\n});\ncy.get('input-filter input[placeholder=\"ID\"]').type(`${data.ID}{enter}`);\ncy.wait(500);\ncy.get('tbody').contains('tr', `${data.ID}`).then(tableRow1 => {\n  cy.wrap(tableRow1).find('td').eq(6).should('contain', `${data.Age}`);\n});\ncy.get('input-filter input[placeholder=\"ID\"]').clear();\ncy.wait(500);",
+              "err": {},
+              "uuid": "588ebb5d-16f5-476b-94b7-2a56a9ebb751",
+              "parentUUID": "cd99f069-7721-488c-a96b-e3c99199b387",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Edit the table row",
+              "fullTitle": "Smart Table Suite Edit the table row",
+              "timedOut": null,
+              "duration": 6566,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('a[title=\"Smart Table\"]').click();\ncy.get('tbody').contains('tr', 'Larry').then(tableRow => {\n  cy.wrap(tableRow).find('.nb-edit').click();\n  cy.wrap(tableRow).find('[placeholder=\"Age\"]').clear().type('40');\n  cy.wrap(tableRow).find('.nb-checkmark').click();\n  cy.wrap(tableRow).find('td').eq(6).should('contain', '40');\n});",
+              "err": {},
+              "uuid": "b61e32a0-97a7-4883-b16a-16c31db3176c",
+              "parentUUID": "cd99f069-7721-488c-a96b-e3c99199b387",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Search the table",
+              "fullTitle": "Smart Table Suite Search the table",
+              "timedOut": null,
+              "duration": 17526,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const ageSearch = ['20', '25', '30', '35', '40', '45', '50', '55', '60'];\nageSearch.forEach(age => {\n  cy.get('[placeholder=\"Age\"]').clear().type(`${age}`);\n  cy.wait(250);\n  cy.get('tbody').find('tr').each(tableRows => {\n    var rowData = tableRows.find('td').text().trim();\n    if (rowData == 'No data found') {\n      cy.wrap(tableRows).find('td').should('contain', `${rowData}`);\n    } else {\n      cy.wrap(tableRows).find('td').eq(6).should('contain', `${age}`);\n    }\n  });\n});\ncy.get('[placeholder=\"Age\"]').clear();\ncy.wait(200);",
+              "err": {},
+              "uuid": "dc10017f-9feb-4cd3-8ce2-6c99c2a06c34",
+              "parentUUID": "cd99f069-7721-488c-a96b-e3c99199b387",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Delete the table row",
+              "fullTitle": "Smart Table Suite Delete the table row",
+              "timedOut": null,
+              "duration": 5444,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Delete the first row - approach1\ncy.get('tbody tr').first().find('.nb-trash').click();\ncy.on('window:confirm', confirm => {\n  expect(confirm).to.equal('Are you sure you want to delete?');\n}); //Delete the first row - approach2\nconst stub = cy.stub();\ncy.on('window:confirm', stub);\ncy.get('tbody tr').first().find('.nb-trash').click().then(() => {\n  expect(stub.getCall(0)).to.be.calledWith('Are you sure you want to delete?');\n}); //Delete confirming to false\n// cy.get('tbody tr').first().find('.nb-trash').click()\n// cy.on('window:confirm', (confirm) => {\n//     return false;\n// })",
+              "err": {},
+              "uuid": "fc9e5b3c-3ee1-4987-8ed8-3a83a9f44180",
+              "parentUUID": "cd99f069-7721-488c-a96b-e3c99199b387",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bc65a4f3-ef90-437a-9a14-377dc67218dd",
+            "588ebb5d-16f5-476b-94b7-2a56a9ebb751",
+            "b61e32a0-97a7-4883-b16a-16c31db3176c",
+            "dc10017f-9feb-4cd3-8ce2-6c99c2a06c34",
+            "fc9e5b3c-3ee1-4987-8ed8-3a83a9f44180"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 54497,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\.jsons",
+        "charts": true,
+        "reportPageTitle": "NGX-Admin",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

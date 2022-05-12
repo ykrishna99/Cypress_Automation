@@ -1,0 +1,147 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-05-12T14:26:21.592Z",
+    "end": "2022-05-12T14:26:37.986Z",
+    "duration": 16394,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "95f5da2d-3a6f-4b0d-b245-b7889a5770bc",
+      "title": "",
+      "fullFile": "cypress/integration/NGX-Admin-Programs/homeTest.spec.js",
+      "file": "cypress/integration/NGX-Admin-Programs/homeTest.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "f393baa8-250b-46e7-b406-9a50da925c16",
+          "title": "Home Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Menus Validation",
+              "fullTitle": "Home Suite Menus Validation",
+              "timedOut": null,
+              "duration": 5411,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_HomePage.home.menusValidation();",
+              "err": {},
+              "uuid": "66a9bfb2-aa4b-4e08-b84a-7fadb1a063aa",
+              "parentUUID": "f393baa8-250b-46e7-b406-9a50da925c16",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Themes Validation",
+              "fullTitle": "Home Suite Themes Validation",
+              "timedOut": null,
+              "duration": 5928,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_HomePage.home.themesValidation();",
+              "err": {},
+              "uuid": "3ba72c0f-ee35-420a-9b89-c4e0606f3192",
+              "parentUUID": "f393baa8-250b-46e7-b406-9a50da925c16",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Navigation Test",
+              "fullTitle": "Home Suite Navigation Test",
+              "timedOut": null,
+              "duration": 4743,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_HomePage.home.menusValidation();\n_HomePage.home.themesValidation();",
+              "err": {},
+              "uuid": "955fc1c3-721b-4f35-94bb-394e8bf7495c",
+              "parentUUID": "f393baa8-250b-46e7-b406-9a50da925c16",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "66a9bfb2-aa4b-4e08-b84a-7fadb1a063aa",
+            "3ba72c0f-ee35-420a-9b89-c4e0606f3192",
+            "955fc1c3-721b-4f35-94bb-394e8bf7495c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 16082,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress\\reports\\.jsons",
+        "charts": true,
+        "reportPageTitle": "NGX-Admin",
+        "embeddedScreenshots": true,
+        "inlineAssets": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
