@@ -9,7 +9,7 @@ const monthNames = ["January", "February", "March", "April", "May", "June",
 
 describe('Datepicker suite', function () {
 
-    it('Common Datepicker', function () {
+    beforeEach('Open App', function () {
         cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
@@ -17,6 +17,9 @@ describe('Datepicker suite', function () {
         cy.get('a[title="Forms"]').click()
         cy.get('a[title="Datepicker"]').click()
         cy.get('ngx-datepicker').should('be.visible')
+    })
+
+    it('Common Datepicker', function () {
         cy.get('nb-card nb-card-header').each( (dp, index) => {
             var dpName = dp.text().trim()
             expect(dpName).equals(dpHeaders[index])

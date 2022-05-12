@@ -12,10 +12,13 @@ describe('Home suite', function () {
         "Corporate":"rgb(255, 255, 255)",
     }
 
-    it('Menus validation', function (){
+    beforeEach('Open App', function () {
         cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
+    })
+
+    it('Menus validation', function (){
         cy.get('span.menu-title').each( menuItems => {
             const actMenu = menuItems.text().trim()   
             for (let index = 0; index < menus.length; index++) {

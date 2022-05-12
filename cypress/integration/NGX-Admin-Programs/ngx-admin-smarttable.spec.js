@@ -6,16 +6,17 @@ const smartTblColumns = ['ID', 'First Name', 'Last Name', 'Username', 'E-mail', 
 
 describe("Smart Table Suite", function () {
 
-    it("Smart Table - Verify table headers", function () {
+    beforeEach('Open App', function () {
         cy.visit('pages')
         cy.title().should('include', 'ngx-admin')
         cy.get('.logo').should('have.text', 'ngx-admin')
-
         cy.get('a[title="Tables & Data"]').click()
         cy.get('a[title="Smart Table"]').click()
         cy.get('nb-card-header').should('have.text', ' Smart Table ')
         cy.get('table').should('be.visible')
+    })
 
+    it("Smart Table - Verify table headers", function () {
         // Verifying table headers
         cy.get('.ng2-smart-actions div').should('have.text', 'Actions')
         cy.get('ng2-smart-table-title a').each( (tableColumns, index) => {
