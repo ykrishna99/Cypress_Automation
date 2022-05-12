@@ -93,6 +93,7 @@ export class SmartTablesPage {
     //Delete the table row
     deleteTheTableRow(){
         //Delete the first row - approach1
+        cy.wait(200)
         cy.get('tbody tr').first().find('.nb-trash').click()
         cy.on('window:confirm', (confirm) =>{
             expect(confirm).to.equal('Are you sure you want to delete?')            
