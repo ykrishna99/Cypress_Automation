@@ -7,9 +7,7 @@ import { formLayout } from "../../support/page_objects/FormLayoutsPage";
 describe('Forms Suite', function () {
     
     beforeEach('Open App', function () {
-        cy.visit('pages')
-        cy.title().should('include', 'ngx-admin')
-        cy.get('.logo').should('have.text', 'ngx-admin')
+        cy.openApplication()
         home.navigateTo_FormLayout()
     })
 

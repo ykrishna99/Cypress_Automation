@@ -7,14 +7,8 @@ import { smartTable } from "../../support/page_objects/SmartTablesPage";
 describe('Smart Tables Suite', function () {
 
     beforeEach('Open App', function () {
-        cy.visit('pages')
-        cy.title().should('include', 'ngx-admin')
-        cy.get('.logo').should('have.text', 'ngx-admin')
-
-        cy.get('a[title="Tables & Data"]').click()
-        cy.get('a[title="Smart Table"]').click()
-        cy.get('nb-card-header').should('have.text', ' Smart Table ')
-        cy.get('table').should('be.visible')
+        cy.openApplication()
+        home.navigateTo_SmartTable()
     })
 
     it('Table headers Test', function (){

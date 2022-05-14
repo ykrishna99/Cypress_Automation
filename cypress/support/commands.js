@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('openApplication', () => {
+    cy.visit('pages')
+    cy.title().should('include', 'ngx-admin')
+    cy.get('.logo').should('have.text', 'ngx-admin')  
+})

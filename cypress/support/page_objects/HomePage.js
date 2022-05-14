@@ -57,6 +57,12 @@ export class HomePage {
         cy.get('table').should('be.visible')
     }
 
+    navigateTo_ModalDialog(){
+        cy.contains('Modal & Overlays').click()
+        cy.contains('Dialog').click()
+        cy.get('nb-card-header').should('contain', 'Open Dialog')
+    }
+
 }
 
 export const home = new HomePage()

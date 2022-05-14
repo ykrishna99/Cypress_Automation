@@ -6,9 +6,7 @@ import { home } from "../../support/page_objects/HomePage";
 describe('Home Suite', function () {
 
     beforeEach('Open App', function () {
-        cy.visit('pages')
-        cy.title().should('include', 'ngx-admin')
-        cy.get('.logo').should('have.text', 'ngx-admin')
+        cy.openApplication()
     })
 
     it('Menus Validation', function () {
